@@ -10,8 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrl: './dialog-confirmation.scss',
 })
 export class DialogConfirmation {
-    title!: string;
-    description!: string;
+    title: string;
+    description: string;
 
     constructor(
         public dialogRef: MatDialogRef<DialogConfirmation>,

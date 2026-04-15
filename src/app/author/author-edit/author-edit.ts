@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
     styleUrl: './author-edit.scss',
 })
 export class AuthorEdit implements OnInit {
-    author!: Author;
+    author: Author;
 
     constructor(
         public dialogRef: MatDialogRef<AuthorEdit>,

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from '../category.service';
-import { Category } from '../model/category';
+import { Category } from '../model/Category';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrl: './category-edit.scss'
 })
 export class CategoryEdit implements OnInit {
-    category!: Category;
+    category: Category;
 
     constructor(
         public dialogRef: MatDialogRef<CategoryEdit>,
