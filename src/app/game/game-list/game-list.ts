@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GameEdit} from '../game-edit/game-edit';
 import { GameService } from '../game.service';
@@ -33,23 +33,32 @@ import { GameItem } from './game-item/game-item';
     styleUrl: './game-list.scss',
 })
 export class GameList implements OnInit {
-    categories: Category[];
-    games: Game[];
+    categories: Category[] = [];
+    games: Game[] = [];
     filterCategory: Category;
     filterTitle: string;
 
     constructor(
         private gameService: GameService,
         private categoryService: CategoryService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private cdr: ChangeDetectorRef
     ) {}
 
     ngOnInit(): void {
-        this.gameService.getGames().subscribe((games) => (this.games = games));
+       console.log('Antes de subscribe:', this.games);
+        this.gameService.getGames().subscribe((games) => {
+        console.log('Después de subscribe:', games);
+        this.games = games;
+        this.cdr.detectChanges();
+      });
 
         this.categoryService
             .getCategories()
-            .subscribe((categories) => (this.categories = categories));
+            .subscribe((categories) => {
+                this.categories = categories;
+                this.cdr.detectChanges();
+            });
     }
 
     onCleanFilter(): void {
@@ -65,7 +74,10 @@ export class GameList implements OnInit {
 
         this.gameService
             .getGames(title, categoryId)
-            .subscribe((games) => (this.games = games));
+            .subscribe((games) => {
+                this.games = games;
+                this.cdr.detectChanges();
+            });
     }
 
     createGame() {
