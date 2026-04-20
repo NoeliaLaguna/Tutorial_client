@@ -209,10 +209,16 @@ export class LoanEdit implements OnInit {
       return;
     }
 
+
+    const startDateForSave = new Date(this.loan.startDate);
+    startDateForSave.setDate(startDateForSave.getDate() + 1);
+    const endDateForSave = new Date(this.loan.endDate);
+    endDateForSave.setDate(endDateForSave.getDate() + 1);
+
     const loanDto = {
       id: this.loan.id,
-      startDate: this.loan.startDate,
-      endDate: this.loan.endDate,
+      startDate: startDateForSave,
+      endDate: endDateForSave,
       game: { id: this.loan.game.id },
       client: { id: this.loan.client.id },
     };
